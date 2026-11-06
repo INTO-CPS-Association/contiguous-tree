@@ -1,0 +1,26 @@
+[package]
+name = "contiguous-tree-macros"
+version = "0.1.0"
+edition = "2024"
+description = "Procedural macros for contiguous-tree"
+repository = "https://github.com/INTO-CPS-Association/contiguous-tree"
+readme = "README.md"
+license-file = "LICENSE.md"
+include = ["src/**", "tests/**", "Cargo.toml", "README.md", "LICENSE.md", "COPYING", "ICA-USAGE-MODE.txt"]
+
+[lib]
+proc-macro = true
+
+[features]
+default = []
+serde = []
+
+[dependencies]
+proc-macro-crate = "3.5.0"
+proc-macro2 = "1.0.107"
+quote = "1.0.47"
+syn = { version = "3.0.4", features = ["full"] }
+
+[dev-dependencies]
+renamed-contiguous-tree = { package = "contiguous-tree", path = "..", features = ["serde"] }
+trybuild = "1"
