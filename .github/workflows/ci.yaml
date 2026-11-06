@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        features: ["", "serde", "thread-safe", "serde,thread-safe"]
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          components: rustfmt
+      - run: cargo fmt --all -- --check
+      - run: cargo check -p contiguous-tree --all-targets --locked --features "${{ matrix.features }}"
+      - run: cargo test -p contiguous-tree --locked --features "${{ matrix.features }}"
+      - run: cargo check --workspace --all-targets --locked --features "${{ matrix.features }}"
+      - run: cargo test --workspace --locked --features "${{ matrix.features }}"

@@ -2,7 +2,15 @@
 name = "contiguous-tree"
 version = "0.1.0"
 edition = "2024"
-license-file = "../../LICENSE.md"
+description = "Contiguous postorder trees with typed schemas, cursors, and rewriting"
+repository = "https://github.com/INTO-CPS-Association/contiguous-tree"
+readme = "README.md"
+license-file = "LICENSE.md"
+include = ["src/**", "tests/**", "Cargo.toml", "README.md", "LICENSE.md", "COPYING", "ICA-USAGE-MODE.txt"]
+
+[workspace]
+members = ["macros"]
+resolver = "3"
 
 [lib]
 name = "contiguous_tree"
@@ -14,7 +22,7 @@ thread-safe = []
 serde = ["dep:serde", "contiguous-tree-macros/serde"]
 
 [dependencies]
-contiguous-tree-macros = { path = "../contiguous-tree-macros" }
+contiguous-tree-macros = { version = "=0.1.0", path = "macros" }
 serde = { version = "1.0.229", optional = true }
 
 [dev-dependencies]
